@@ -4,8 +4,9 @@ package intro;//this is a package
 public class IntroMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		CodingConventions conventionsInstance = new CodingConventions();
+		
+		
 	}
 
 }

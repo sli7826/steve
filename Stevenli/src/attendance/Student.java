@@ -43,7 +43,10 @@ public class Student implements Attendee {
 		while(temp1.length()<40) {
 			temp1+=" ";
 		}
-		return temp1+=present;
+		if(present)
+			return temp1+"Present"+"\n";
+		else
+			return temp1+"Not Present"+"\n";
 	}
-	//a
+	
 }

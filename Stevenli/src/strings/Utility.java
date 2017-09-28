@@ -21,6 +21,17 @@ public class Utility{
     }
   }
   
+  public static int findKeyword(String searchString, String keyword, int startPsn) {
+	  searchString=searchString.toLowerCase();
+	  keyword=keyword.toLowerCase();
+	  int psn=searchString.indexOf(keyword,startPsn);
+	  while(psn>=0) {
+		  if(keywordIsIsolated(psn,keyword,searchString)&& noNegations(searchString,psn)) 
+			  return psn;
+		  psn=searchString.indexOf(keyword, psn+1);  
+	  }
+	  return -1;
+  }
   public static boolean keywordIsIsolated(int psn, String keyword, String s){
      try {
     	 return(s.substring(psn,psn+keyword.length()).equals(keyword)&&s.substring(psn-1,psn).compareTo("a")<0&&s.substring(psn+keyword.length(),psn+1+keyword.length()).compareTo("a")<0);

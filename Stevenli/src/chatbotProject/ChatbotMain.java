@@ -48,7 +48,7 @@ public class ChatbotMain {
 				   }
 			  }
 			  catch(StringIndexOutOfBoundsException e) {
-				  return true;
+				  check=true;
 			  }
 		  }
 		  return check;

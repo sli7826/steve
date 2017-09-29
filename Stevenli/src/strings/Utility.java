@@ -56,7 +56,7 @@ public class Utility{
 			   }
 		  }
 		  catch(StringIndexOutOfBoundsException e) {
-			  return true;
+			  check=true;
 		  }
 	  }
 	  return check;

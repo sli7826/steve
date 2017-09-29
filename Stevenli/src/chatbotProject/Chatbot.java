@@ -1,6 +1,6 @@
 package chatbotProject;
 
-public class Chatbot implements Topic {
+public class Chatbot{
 	private String userName;
 	private Topic steven;
 	private boolean chatting;

@@ -1,12 +1,12 @@
 package chatbotProject;
 
-public class Chatbot {
+public class Chatbot implements Topic {
 	private String userName;
 	private Topic steven;
 	private boolean chatting;
 
 	public Chatbot() {
-		steven = new Chatbot();
+		steven = new ChatbotSteven();
 		userName="unknown";
 		chatting=true;
 		
@@ -19,10 +19,10 @@ public class Chatbot {
 			String response = ChatbotMain.getInput();
 			if(steven.IsTriggered(response)) {
 				chatting = false;
-				steven.startChatting();
+				steven.startChatting(response);
 			}
 			else {
-				ChatbotMain.print("a");
+				ChatbotMain.print("I don't understand.");
 			}
 		}
 	}

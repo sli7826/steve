@@ -6,11 +6,9 @@ public class ArraysMain {
 	private String[] testArray;
 	private int[] intRay;
 	public ArraysMain() {
-		intRay=new int[52];
-		//populate(intRay);
-		//checkOccurences(intRay,3,18);
-		populate1ToN(intRay);
-		shuffle(intRay);
+		intRay=new int[50];
+		populate(intRay);
+		System.out.println("The longest consecutive rolls is "+longestConsecutiveSequence(intRay)[0]+" and it happened at "+longestConsecutiveSequence(intRay)[1]+". It started with a "+intRay[longestConsecutiveSequence(intRay)[1]]);
 		System.out.println(Arrays.toString(intRay));
 	}
 
@@ -47,7 +45,7 @@ public class ArraysMain {
 
 	private void populate(int[] intRay) {
 		for(int i=0;i<intRay.length;i++) {
-			intRay[i]=diceRoll(3);
+			intRay[i]=diceRoll(2);
 		}
 	}
 
@@ -69,5 +67,65 @@ public class ArraysMain {
 		}
 		return a;
 	}
-
+	public int[] reverseOrder(int[] arr) {
+		int[] a=new int[arr.length];
+		for(int i=0;i<arr.length;i++) {
+			a[i]=arr[i];
+		}
+		for(int i=0;i<a.length/2;i++) {
+			swap(a,i,a.length-i-1);
+		}
+		return a;
+	}
+	public int countLessThan(int[] arr, int n) {
+		int a=0;
+		for(int value:arr) {
+			if(value<n) {
+				a++;
+			}
+		}
+		return a;
+	}
+	public void frontToBack(int[] arr) {
+		for(int i=0;i<arr.length-1;i++) {
+			swap(arr,i,i+1);
+		}
+	}
+	public void cycleThrough(int[] arr,int n) {
+		while(n!=0) {
+			frontToBack(arr);
+			n--;
+		}
+	}
+	public int[] longestConsecutiveSequence(int[] arr) {
+		int current=1;
+		int longest=0;
+		int[] a=new int[2];
+		int idx=0;
+		for(int i=0;i<arr.length-1;i++) {
+			if((arr[i]+1)==arr[i+1]) {
+				current++;
+			}
+			else if(current>longest){
+				longest=current;
+				current=1;
+				a[1]=idx;
+				idx=i;
+			}
+			else {
+				current=1;
+			}
+		}
+		if(current>longest) {
+			longest=current;
+			a[1]=idx;
+		}
+		if(longest==0) {
+			longest = arr.length;
+			a[1]=0;
+		}
+		a[0]=longest;
+		return a;
+	}
+	
 }

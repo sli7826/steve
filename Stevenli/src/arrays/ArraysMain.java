@@ -6,9 +6,9 @@ public class ArraysMain {
 	private String[] testArray;
 	private int[] intRay;
 	public ArraysMain() {
-		intRay=new int[50];
+		intRay=new int[25];
 		populate(intRay);
-		System.out.println("The longest consecutive rolls is "+longestConsecutiveSequence(intRay)[0]+" and it happened at "+longestConsecutiveSequence(intRay)[1]+". It started with a "+intRay[longestConsecutiveSequence(intRay)[1]]);
+		System.out.println("The longest consecutive rolls is "+longestConsecutiveSequence(intRay)[0]+" and it happened at "+longestConsecutiveSequence(intRay)[1]+". It started with a "+intRay[longestConsecutiveSequence(intRay)[1]-longestConsecutiveSequence(intRay)[0]]);
 		System.out.println(Arrays.toString(intRay));
 	}
 
@@ -109,7 +109,6 @@ public class ArraysMain {
 			else if(current>longest){
 				longest=current;
 				current=1;
-				a[1]=idx;
 				idx=i;
 			}
 			else {
@@ -124,6 +123,7 @@ public class ArraysMain {
 			longest = arr.length;
 			a[1]=0;
 		}
+		a[1]=idx+1;
 		a[0]=longest;
 		return a;
 	}

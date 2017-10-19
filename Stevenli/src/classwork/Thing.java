@@ -6,6 +6,6 @@ public class Thing {
 		this.description=description;
 	}
 	public String toString() {
-		return "I am just a "+description+". An inaminate object. What do you expect me to say?";
+		return description;
 	}
 }

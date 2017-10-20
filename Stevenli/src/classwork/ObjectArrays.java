@@ -5,15 +5,9 @@ public class ObjectArrays {
 	public ObjectArrays() {
 		Person[] people=new Person[20];
 		populate(people);
-		Person[] people2=selectGroup(people,20);
-		Person[] people3=selectGroup(people,20);
-		double a=0;
-		for(int i=0;i<100;i++) {
-			people2=selectGroup(people,20);
-			people3=selectGroup(people,20);
-			a+=countDifferences(people3,people2);
+		for(Person a:people) {
+			System.out.println(a);
 		}
-		System.out.println(a/100);
 	}
 
 	public void populate(Person[] people) {

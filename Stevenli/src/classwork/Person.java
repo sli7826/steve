@@ -5,6 +5,7 @@ public class Person {
 	private String lastName;
 	private Borough home;
 	private Hobby hobby;
+	private String nickname;
 	private Person[] friends;
 	public static final String[] FIRST_START= {"Chr","M","L","Gr","Ph","B","Th"};
 	public static final String[] FIRST_MIDDLE= {"isti","icha","er","et","ere","era","ina"};
@@ -16,6 +17,7 @@ public class Person {
 		firstName=first;
 		lastName=last;
 		this.home=home;
+		nickname=createNickname(firstName);
 		this.hobby=Hobby.randomHobby();
 		friends=new Person[3];
 	}
@@ -47,7 +49,7 @@ public class Person {
 		return p;
 	}
 	public void printFriends() {
-		System.out.println("My name is "+firstName+" "+lastName+" and these are my friends:");
+		System.out.println("My name is "+firstName+" "+lastName+". Call me "+nickname+". and these are my friends:");
 		for(Person f:friends) {
 			if(f!=null) System.out.println(f);
 		}
@@ -59,10 +61,32 @@ public class Person {
 		friends[0]=p;
 	}
 	public String toString() {
-		return "My name is "+firstName+" "+lastName+" and I live in "+home.toString()+". I like "+hobby.toString()+".";
+		return "My name is "+firstName+" "+lastName+". Call me "+nickname+" and I live in "+home.toString()+". I like "+hobby.toString()+".";
 	}
 	public Hobby getHobby() {
 		return hobby;
+	}
+	public static String createNickname(String name) {
+		String[] a= {"a","e","i","o","u"};
+		int b=0;
+		for (int i=0;i<name.length();i++) {
+			for(String c:a) {
+				if(name.substring(i, i+1).equalsIgnoreCase(c)) {
+					b++;
+				}
+			}
+			if(b==2) {
+				return name.substring(0, i);
+			}	
+		}
+		return name;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+		nickname=createNickname(firstName);
 	}
 	
 }

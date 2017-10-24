@@ -28,7 +28,48 @@ public class CaveRoom {
 			return arr[dir];
 		return "";
 	}
-	private void setDirections() {
+	public void enter() {
+		contents="X";
+	}
+	public void leave() {
+		contents=defaultContents;
+	}
+	public void setConnection(int direction,CaveRoom anotherRoom,Door door) {
+		addRoom(direction,anotherRoom,door);
+		anotherRoom.addRoom(oppositeDirection(direction),this,door);
+	}
+	public static int oppositeDirection(int direction) {
+		return (direction+2)%4;
+	}
+	public void addRoom(int direction, CaveRoom cave, Door door) {
+		borderingRooms[direction]=cave;
+		doors[direction]=door;
+		setDirections();
+	}
+	public void interpretInput(String input) {
+		while(isValid(input)) {
+			System.out.println("You can only enter 'w','a''s', or 'd'.");
+			input=CaveExplorer.in.nextLine();
+		}
+		goToRoom("wdsa".indexOf(input));
+	}
+	private void goToRoom(int direction) {
+		if(borderingRooms[direction]!=null&&doors[direction]!=null) {
+			CaveExplorer.currentRoom.leave();
+			CaveExplorer.currentRoom=borderingRooms[direction];
+			CaveExplorer.currentRoom.enter();
+			CaveExplorer.inventory.updateMap();
+		}
+		
+	}
+	public static void setUpCaves() {
+		
+	}
+	private boolean isValid(String input) {
+		String validEntries="wdsa";
+		return validEntries.indexOf(input)>-1&&input.length()==1;
+	}
+	public void setDirections() {
 		directions="";
 		boolean doorFound=false;
 		for(int i=0;i<doors.length;i++) {

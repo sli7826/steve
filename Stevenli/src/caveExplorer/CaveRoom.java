@@ -47,7 +47,7 @@ public class CaveRoom {
 		setDirections();
 	}
 	public void interpretInput(String input) {
-		while(isValid(input)) {
+		while(!isValid(input)) {
 			System.out.println("You can only enter 'w','a''s', or 'd'.");
 			input=CaveExplorer.in.nextLine();
 		}
@@ -63,7 +63,16 @@ public class CaveRoom {
 		
 	}
 	public static void setUpCaves() {
-		
+		CaveExplorer.caves=new CaveRoom[5][5];
+		for(int row=0;row<CaveExplorer.caves.length;row++) {
+			for(int col=0;col<CaveExplorer.caves[row].length;col++) {
+				CaveExplorer.caves[row][col]=new CaveRoom("This cave has coords("+row+","+col+")");
+			}
+		}
+		CaveExplorer.currentRoom=CaveExplorer.caves[0][1];
+		CaveExplorer.currentRoom.enter();
+		CaveRoom[][] c=CaveExplorer.caves;
+		c[0][1].setConnection(SOUTH, c[1][1], new Door());
 	}
 	private boolean isValid(String input) {
 		String validEntries="wdsa";
@@ -84,7 +93,7 @@ public class CaveRoom {
 	}
 	
 	public String getDescription() {
-		return description;
+		return description +"\n"+directions;
 	}
 
 	public void setDescription(String description) {

@@ -53,7 +53,7 @@ public class CaveRoom {
 		}
 		goToRoom("wdsa".indexOf(input));
 	}
-	private void goToRoom(int direction) {
+	public void goToRoom(int direction) {
 		if(borderingRooms[direction]!=null&&doors[direction]!=null) {
 			CaveExplorer.currentRoom.leave();
 			CaveExplorer.currentRoom=borderingRooms[direction];
@@ -74,7 +74,7 @@ public class CaveRoom {
 		CaveRoom[][] c=CaveExplorer.caves;
 		c[0][1].setConnection(SOUTH, c[1][1], new Door());
 	}
-	private boolean isValid(String input) {
+	public boolean isValid(String input) {
 		String validEntries="wdsa";
 		return validEntries.indexOf(input)>-1&&input.length()==1;
 	}
@@ -110,6 +110,9 @@ public class CaveRoom {
 
 	public void setDefaultContents(String defaultContents) {
 		this.defaultContents = defaultContents;
+	}
+	public Door getDoor(int direction) {
+		return doors[direction];
 	}
 	
 	

@@ -48,18 +48,32 @@ public class CaveRoom {
 	}
 	public void interpretInput(String input) {
 		while(!isValid(input)) {
-			System.out.println("You can only enter 'w','a''s', or 'd'.");
+			printAllowedEntry();
 			input=CaveExplorer.in.nextLine();
 		}
-		goToRoom("wdsa".indexOf(input));
+		String dirs=validKeys();
+		respondToKey(dirs.indexOf(input));
 	}
-	public void goToRoom(int direction) {
-		if(borderingRooms[direction]!=null&&doors[direction]!=null) {
-			CaveExplorer.currentRoom.leave();
-			CaveExplorer.currentRoom=borderingRooms[direction];
-			CaveExplorer.currentRoom.enter();
-			CaveExplorer.inventory.updateMap();
+	public String validKeys(){
+		return "wdsa";
+	}
+	public void printAllowedEntry() {
+		System.out.println("You can only enter 'w','a''s', or 'd'.");
+	}
+	public void respondToKey(int direction) {
+		if(direction<4) {
+			if(borderingRooms[direction]!=null&&doors[direction]!=null) {
+				CaveExplorer.currentRoom.leave();
+				CaveExplorer.currentRoom=borderingRooms[direction];
+				CaveExplorer.currentRoom.enter();
+				CaveExplorer.inventory.updateMap();
+			}
+		}else {
+			performAction(direction);
 		}
+	}
+	public void performAction(int direction) {
+		CaveExplorer.print("That key does nothing.");
 		
 	}
 	public static void setUpCaves() {
@@ -75,7 +89,7 @@ public class CaveRoom {
 		c[0][1].setConnection(SOUTH, c[1][1], new Door());
 	}
 	public boolean isValid(String input) {
-		String validEntries="wdsa";
+		String validEntries=validKeys();
 		return validEntries.indexOf(input)>-1&&input.length()==1;
 	}
 	public void setDirections() {

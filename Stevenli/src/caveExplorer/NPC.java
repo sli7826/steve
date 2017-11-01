@@ -1,23 +1,78 @@
 package caveExplorer;
 
 public class NPC {
+	
+	private CaveRoom[][] floor;
+	private int currentRow;
+	private int currentCol;
+	private NPCRoom currentRoom;
+	
+	private boolean active;
+	private String activeDescription;
+	private String inactiveDescription;
 
 	public NPC() {
-		// TODO Auto-generated constructor stub
+		floor=CaveExplorer.caves;
+		activeDescription = "There is a person waiting to talk to you.";
+		inactiveDescription = "The person you spoke to earlier is standing";
+		currentCol=-1;
+		currentRow=-1;
+		currentRoom=null;
+		active=true;
 	}
 
 	public boolean isActive() {
-		// TODO Auto-generated method stub
-		return false;
+		return active;
+	}
+	
+	public void setposition(int row,int col) {
+		if(row>=0&&row<floor.length&&col>=0&&col<floor[row].length&&floor[row][col] instanceof NPCRoom) {
+			if(currentRoom!=null) {
+				currentRoom.leaveNPC();
+			}
+			currentRow=row;
+			currentCol=col;
+			currentRoom=(NPCRoom)floor[row][col];
+			currentRoom.enterNPC(this);
+		}
 	}
 
 	public void interact() {
-		// TODO Auto-generated method stub
-		
+		CaveExplorer.print("Hi");
+		String s=CaveExplorer.in.nextLine();
+		while(!s.equalsIgnoreCase("bye")) {
+			CaveExplorer.print(".");
+			s=CaveExplorer.in.nextLine();
+		}
+		CaveExplorer.print("bye");
+		active=false;
 	}
 
 	public String getInactiveDescription() {
+		
+		return inactiveDescription;
+	}
+
+	public String getActiveDescription() {
 		// TODO Auto-generated method stub
+		return activeDescription;
+	}
+
+	public void act() {
+		if(active) {
+			int[] move=calcluateMovement();
+			int newRow=currentRow+move[0];
+			int newCol=currentCol+move[1];
+		}
+		
+	}
+
+	public int[] calcluateMovement() {
+		int[] moves=new int[2];
+		int[][] possibleMoves={{-1,0},{0,1},{1,0},{0,-1}};
+		int rand=(int)(Math.random()*4);
+		moves[0]=possibleMoves[rand][0]+currentRow;
+		moves[1]=possibleMoves[rand][1]+currentCol;
 		return null;
 	}
 

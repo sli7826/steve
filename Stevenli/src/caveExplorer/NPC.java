@@ -61,19 +61,30 @@ public class NPC {
 	public void act() {
 		if(active) {
 			int[] move=calcluateMovement();
-			int newRow=currentRow+move[0];
-			int newCol=currentCol+move[1];
+			int newRow=move[0];
+			int newCol=move[1];
+			setposition(newRow,newCol);
 		}
-		
 	}
 
 	public int[] calcluateMovement() {
 		int[] moves=new int[2];
 		int[][] possibleMoves={{-1,0},{0,1},{1,0},{0,-1}};
-		int rand=(int)(Math.random()*4);
+		int rand=(int)(Math.random()*possibleMoves.length);
 		moves[0]=possibleMoves[rand][0]+currentRow;
 		moves[1]=possibleMoves[rand][1]+currentCol;
-		return null;
+		CaveExplorer.caves[currentRow][currentCol].setConnection(rand,CaveExplorer.caves[moves[0]][moves[1]],new Door());
+		/*while(currentRoom.getDoor(rand)==null||!(CaveExplorer.caves[moves[0]][moves[1]] instanceof NPCRoom)) {
+			rand=(int)(Math.random()*possibleMoves.length);
+			moves[0]=possibleMoves[rand][0]+currentRow;
+			moves[1]=possibleMoves[rand][1]+currentCol;
+		}*/
+		return moves;
+	}
+	
+	public int[] returnPos() {
+		int[] a={currentRow,currentCol};
+		return a;
 	}
 
 }

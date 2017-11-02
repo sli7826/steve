@@ -77,16 +77,43 @@ public class CaveRoom {
 		
 	}
 	public static void setUpCaves() {
-		CaveExplorer.caves=new CaveRoom[5][5];
+		CaveExplorer.caves=new NPCRoom[5][5];
 		for(int row=0;row<CaveExplorer.caves.length;row++) {
 			for(int col=0;col<CaveExplorer.caves[row].length;col++) {
-				CaveExplorer.caves[row][col]=new CaveRoom("This cave has coords("+row+","+col+")");
+				CaveExplorer.caves[row][col]=new NPCRoom("This cave has coords("+row+","+col+")");
 			}
 		}
+		CaveExplorer.npcs=new NPC[1];
+		CaveExplorer.npcs[0]=new NPC();
+		CaveExplorer.npcs[0].setposition(1, 1);
 		CaveExplorer.currentRoom=CaveExplorer.caves[0][1];
 		CaveExplorer.currentRoom.enter();
-		CaveRoom[][] c=CaveExplorer.caves;
-		c[0][1].setConnection(SOUTH, c[1][1], new Door());
+		int[][] wentTo=new int[CaveExplorer.caves.length*CaveExplorer.caves.length][2];
+		int[] start={1,1};
+		wentTo[0]= start;
+		while(checkNull(wentTo)) {
+			CaveExplorer.npcs[0].act();
+			for(int[] a:wentTo) {
+				
+			}
+			break;
+		}
+		
+	}
+	public static boolean checkNull(int[][] arr) {
+		int check=0;
+		for(int[] a:arr) {
+			for(int b:a) {
+				if(b==0) {
+					check++;
+				}
+			}
+			if(check==2) {
+				return true;
+			}
+			check=0;
+		}
+		return false;
 	}
 	public boolean isValid(String input) {
 		String validEntries=validKeys();
@@ -126,7 +153,12 @@ public class CaveRoom {
 		this.defaultContents = defaultContents;
 	}
 	public Door getDoor(int direction) {
-		return doors[direction];
+		if(direction>=0 &&direction<doors.length) {
+			return doors[direction];
+		}
+		else {
+			return null;
+		}
 	}
 	
 	

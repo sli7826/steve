@@ -12,10 +12,13 @@ public class makeGridNPC extends NPC{
 	public void setUp() {
 		wentTo[0]= start;
 		int idx=1;
+		boolean check=false;
 		while(checkNull(wentTo)) {
 			super.act();
 			for(int[] a:wentTo) {
-				
+				if(a[0]==super.returnPos()[0]&&a[1]==super.returnPos()[1]) {
+					check=true;
+				}
 			}
 			break;
 		}

@@ -13,7 +13,18 @@ public class Animal {
 		description=getName();
 		age=0;
 	}
-
+	
+	public Animal(String description, Trait trait1, Trait trait2) {
+		this.trait1=trait1;
+		this.trait2=trait2;
+		while(trait2.equals(trait1)) {
+			trait2=new Trait();
+		}
+		this.description=description;
+		
+	}
+	
+	
 	public static void main(String[] args) {
 		for (int i=0;i<10;i++) {
 			Animal someAnimal =new Animal();
@@ -68,6 +79,11 @@ public class Animal {
 
 	public int getAge() {
 		return age;
+	}
+	
+	public void act() {
+		System.out.println(this+" is sleeping");
+		mated=true;
 	}
 
 }

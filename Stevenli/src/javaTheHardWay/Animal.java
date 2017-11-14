@@ -1,0 +1,73 @@
+package javaTheHardWay;
+
+public class Animal {
+	
+	private String description;
+	private Trait trait1;
+	private Trait trait2;
+	private int age;
+	private boolean mated;
+	
+	public Animal() {
+		chooseTraits();
+		description=getName();
+		age=0;
+	}
+
+	public static void main(String[] args) {
+		for (int i=0;i<10;i++) {
+			Animal someAnimal =new Animal();
+			System.out.println(someAnimal);
+		}
+
+	}
+	
+	public String getName() {
+		return "animal";
+	}
+	
+	public void chooseTraits() {
+		trait1=new Trait();
+		trait2=new Trait();
+		while(trait1.equals(trait2)) {
+			trait2=new Trait();
+		}
+	}
+	
+	public String toString() {
+		return "a "+age+" year old, "+trait1+", "+trait2+" "+description;
+	}
+	
+	public void increaseAge() {
+		age++;
+	}
+	
+	public void reset() {
+		mated=false;
+	}
+
+	public boolean hasMated() {
+		return mated;
+	}
+
+	public void setMated(boolean mated) {
+		this.mated = mated;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Trait getTrait1() {
+		return trait1;
+	}
+
+	public Trait getTrait2() {
+		return trait2;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+}

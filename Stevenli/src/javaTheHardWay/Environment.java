@@ -19,7 +19,7 @@ public class Environment {
 	}
 
 	public void growPlants() {
-		plants+=growthRate;
+		plants+=(growthRate+(plants/2));
 		System.out.println("\nThere are "+plants+" plants.");
 		
 	}

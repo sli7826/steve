@@ -15,7 +15,7 @@ public class Wilderness extends Habitat {
 	}
 
 	public String toString() {
-		return this.description+"\n"+animalReport();
+		return this.description+"\n";
 	}
 	
 	public void simulate(int rounds) {
@@ -33,7 +33,7 @@ public class Wilderness extends Habitat {
 				}
 				
 			}
-			String s="\nROUND "+(i+1)+"\nPREDATORS: "+predatorCount+", PREY: "+preyCount+"\n"+animalReport();
+			String s="\nROUND "+(i+1)+"\nPREDATORS: "+predatorCount+", PREY: "+preyCount+"\n";
 			System.out.println(s);
 			for(Animal a:getAnimals()) {
 				if(a!=null)a.act();

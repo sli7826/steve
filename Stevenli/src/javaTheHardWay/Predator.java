@@ -25,7 +25,7 @@ public class Predator extends ReproductionAnimal {
 		wilderness.simulate(2);
 	}
 	
-	public ReproductionAnimal getoffspring(ReproductionAnimal mate) {
+	public ReproductionAnimal getOffspring(ReproductionAnimal mate) {
 		return new Predator(habitat,getDescription(),Trait.getDominateTrait(getTrait1(), mate.getTrait1()),
 				Trait.getDominateTrait(getTrait2(), mate.getTrait2()));
 	}
@@ -43,6 +43,4 @@ public class Predator extends ReproductionAnimal {
 		}
 		return false;
 	}
-	
-
 }

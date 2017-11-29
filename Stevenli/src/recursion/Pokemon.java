@@ -30,11 +30,37 @@ public class Pokemon {
 		squirtle.lapse();
 		bulbasaur.lapse();
 		printScore(squirtle, bulbasaur);
+		System.out.println("Squirtle is attacking again");
+		squirtle.attack(bulbasaur, new Attack() {
+			
+			public void attack(Pokemon target) {
+				int oldHP=target.getHp();
+				target.setHp(oldHP-1);
+			}
+		
+		});
+		printScore(squirtle, bulbasaur);
+		squirtle.levelUp(squirtle,new Effect() {
+			
+			@Override
+			public void effect() {
+				squirtle.setHp(squirtle.getHp()+2);
+				
+			}
+		});
+		printScore(squirtle, bulbasaur);
+		
+	}
+	
+	public void levelUp(Pokemon p,Effect e) {
+		p.level++;
+		e.effect();
+		System.out.println(name+" leveled up and it has gained 2 health.");
 	}
 	
 	public static void printScore(Pokemon squirtle, Pokemon bulbasaur) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(squirtle.getName()+", HP = "+squirtle.getHp());
+		System.out.println(bulbasaur.getName()+", HP = "+bulbasaur.getHp());
 	}
 
 	public void attack(Pokemon target, Attack attack){

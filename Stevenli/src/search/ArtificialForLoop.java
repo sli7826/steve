@@ -20,5 +20,4 @@ public class ArtificialForLoop {
 			forLoop(n-1,a);
 		}
 	}
-
 }

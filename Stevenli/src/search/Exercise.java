@@ -3,7 +3,7 @@ package search;
 public class Exercise {
 	
 	public static void main(String[] args){
-		towerSolution(5,"a","b","c");
+		System.out.println(fib(8));
 	}
 
 	public static int countPrimeFactors(int value, int testPrime) {
@@ -24,15 +24,21 @@ public class Exercise {
 	}
 	
 	public static void towerSolution(int n,String s,String h,String e) {
-		if(n==2) {
-			System.out.println(s+" to "+h);
+		if(n==1) {
 			System.out.println(s+" to "+e);
-			System.out.println(h+" to "+e);
 		}
 		else {
 			towerSolution(n-1,s,e,h);
 			System.out.println(s+" to "+e);
 			towerSolution(n-1,h,s,e);
+		}
+	}
+	public static int fib(int n) {
+		if(n==0)return 0;
+		if(n==1) {
+			return 1;
+		}else {
+			return fib(n-1)+fib(n-2);
 		}
 	}
 }
